@@ -16,7 +16,7 @@ def conexion_db():
     
 # Guarda el usuario en la DB
 def save_user_DB(userId, name, username, email, phone):
-    """Función para guardar al usuario obtenido en JSON Placeholder en la DB"""
+    """Guarda al usuario obtenido en jsonplaceholder en la base de datos"""
     cnx = conexion_db()
     if cnx:
         cursor = cnx.cursor()
@@ -26,9 +26,9 @@ def save_user_DB(userId, name, username, email, phone):
         cursor.close()
     print("\nUsuario Guardado en la DB correctamente\n")
 
-# Guarda el Post obtenido en la DB
+# Guarda el Post en la DB
 def save_post_DB(id_post, post_title, body_post):
-    """Función para guardar el post obtenido por jsonplaceholder en la DB"""
+    """Guarda el post obtenido por jsonplaceholder en la base de datos"""
     cnx = conexion_db()
     if cnx:
         cursor = cnx.cursor()
@@ -40,7 +40,7 @@ def save_post_DB(id_post, post_title, body_post):
 
 # Asigna un post a un usuario
 def asign_post():
-    """Función para asignar un Post a un usuario que se encuentre en la DB"""
+    """Asigna un Post a un usuario que se encuentre en la DB"""
 
     # Obtiene los datos para asignar
     id_post = int(input("Ingrese el ID del post que desea asignar: "))
@@ -54,3 +54,23 @@ def asign_post():
         cnx.commit()
         cursor.close()
     print("\nEl post se ha asignado correctamente.\n")
+
+# Guarda la Tarea en la DB
+def save_todo():
+    """Guarda la Tarea desde Jsonplaceholder en la Base de Datos"""
+    pass
+
+# Asigna una Tarea a un usuario
+def asign_todo():
+
+    # Obtener datos
+    id_todo = int(input(""))
+    userId = int(input(""))
+
+    cnx = conexion_db()
+    if cnx:
+        cursor = cnx.cursor()
+        query = ""
+        cursor.execute(query, (id_todo, userId))
+        cnx.commit()
+        cursor.close()

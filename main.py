@@ -9,6 +9,8 @@ Menú de JSONplaceholder
 1. Consultar Datos de Usuario
 2. Consultar Post
 3. Asignar Post a Usuario
+4. Ver Tarea
+9. Menú de la Base de datos
 0. Salir
 """)
         try: 
@@ -16,7 +18,7 @@ Menú de JSONplaceholder
         except ValueError:
             print("Error: Debe ingresar un número")
             continue  # Volver al inicio del bucle
-              
+
         # User
         if option == 1:
             user = Servicios.ConsumirAPI.view_user()
