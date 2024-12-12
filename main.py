@@ -18,7 +18,7 @@ Menú de JSONplaceholder
               
         # User
         if option == 1:
-            user = Servicios.ConsumirAPI.consultar_usuario()
+            user = Servicios.ConsumirAPI.view_user()
             if user:
                 answer = input("\n¿Desea Guardar el Usuario en la Base de Datos? (si/no): \n")
                 if answer == 'si':
@@ -30,7 +30,7 @@ Menú de JSONplaceholder
 
         # Post
         elif option == 2:
-            post = Servicios.ConsumirAPI.leer_post_por_id()
+            post = Servicios.ConsumirAPI.read_post()
             if post:
                 answer = input("\n¿Desea Guardar el post en la Base de Datos? (si/no): \n")
                 if answer == 'si':
