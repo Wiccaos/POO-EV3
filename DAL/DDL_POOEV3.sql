@@ -1,7 +1,6 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2024-12-12 03:42:24.682
 
--- tables
+-- tables --
 -- Table: Address
 CREATE TABLE Address (
     id_address int  NOT NULL AUTO_INCREMENT,
@@ -11,7 +10,7 @@ CREATE TABLE Address (
     zip_code varchar(100)  NULL,
     lat varchar(50)  NULL,
     lng varchar(50)  NULL,
-    User_id_user int  NOT NULL,
+    User_id_user int  NULL,
     CONSTRAINT Address_pk PRIMARY KEY (id_address)
 );
 
@@ -30,7 +29,7 @@ CREATE TABLE Post (
     id_post int  NOT NULL AUTO_INCREMENT,
     post_title varchar(150)  NOT NULL,
     body_post text  NOT NULL,
-    User_id_user int  NOT NULL,
+    User_id_user int  NULL,
     CONSTRAINT Post_pk PRIMARY KEY (id_post)
 );
 
@@ -39,7 +38,7 @@ CREATE TABLE ToDos (
     id_todo int  NOT NULL AUTO_INCREMENT,
     todo_title varchar(200)  NOT NULL,
     completed bool  NOT NULL,
-    User_id_user int  NOT NULL,
+    User_id_user int  NULL,
     CONSTRAINT ToDos_pk PRIMARY KEY (id_todo)
 );
 
@@ -47,6 +46,7 @@ CREATE TABLE ToDos (
 CREATE TABLE User (
     id_user int  NOT NULL AUTO_INCREMENT,
     username varchar(50)  NOT NULL,
+    user_email varchar(150)  NOT NULL,
     user_website varchar(100)  NOT NULL,
     user_phone varchar(150)  NOT NULL,
     CONSTRAINT User_pk PRIMARY KEY (id_user)
@@ -70,4 +70,3 @@ ALTER TABLE ToDos ADD CONSTRAINT ToDos_User FOREIGN KEY ToDos_User (User_id_user
     REFERENCES User (id_user);
 
 -- End of file.
-

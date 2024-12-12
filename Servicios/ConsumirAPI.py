@@ -1,9 +1,13 @@
 import requests
 from Clases.Post import Post
+from Clases.Users import User
 import Auxiliares.Constantes 
 
-def leer_post_por_id(post_id):
+def leer_post_por_id():
     """Función para leer un post desde JSON Placeholder según el id"""
+
+    post_id = int(input("Ingrese el ID del post que desea leer: "))
+
     try:
         ans = requests.get(f"{Auxiliares.Constantes.URL_Post}/{post_id}")
         ans.raise_for_status()  # Lanza un error si la respuesta no es 200
@@ -17,41 +21,47 @@ def leer_post_por_id(post_id):
         post.body = post_data['body']
         
         return post
+    
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
     except KeyError:
         print("El post no fue encontrado.")
-    
 
-def crear_post():
-    """Función para crear un nuevo post en JSON Placeholder"""
-    nuevo_post = Post()
-    
-    # Solicitar datos del usuario
-    nuevo_post.title = input("Ingrese el título del post: ")
-    nuevo_post.body = input("Ingrese el cuerpo del post: ")
-    
-    # Validar que el ID del usuario sea un número
-    while True:
-        user_id = input("Ingrese el id del usuario (número): ")
-        if user_id.isdigit():
-            nuevo_post.userId = int(user_id)
-            break
-        else:
-            print("Por favor, ingrese un número válido para el ID del usuario.")
-    
+    finally:
+        print(f"\nPost ID: {post.id}\nUserID: {post.userId}\nTítulo: {post.title}\nCuerpo: {post.body}")
+
+
+def consultar_usuario():
+    """Función para consultar los datos de usuario por el id"""
+    user_id = int(input("Ingrese el ID del usuario a consultar: "))
+    user = None
+
     try:
-        # Realizar la solicitud POST
-        ans = requests.post(Auxiliares.Constantes.URL_Post, json=nuevo_post.__dict__)
+        ans = requests.get(f"{Auxiliares.Constantes.URL_Users}/{user_id}")
         ans.raise_for_status()  # Lanza un error si la respuesta no es 200
-        
-        # Crear una instancia de Post con la respuesta
-        created_post_data = ans.json()
-        nuevo_post.id = created_post_data['id']  # Asignar el ID del post creado
-        return nuevo_post  # Retornar el post creado
+        user_data = ans.json()
+
+        # Crear una instancia de Usuario y asignar los valores
+        user = User()
+        user.userId = user_data.get('id')
+        user.name = user_data.get('name')
+        user.username = user_data.get('username')
+        user.email = user_data.get('email')
+        user.phone = user_data.get('phone')
+
+        return user
+
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
+    except KeyError:
+        print("El usuario no fue encontrado.")
+    
+    finally:
+        if user:  # Verifica si `user` fue correctamente inicializado
+            print(f"\nUser  ID: {user.userId}\nNombre de Usuario: {user.username}\nNombre: {user.name}\nEmail: {user.email}\nTeléfono: {user.phone}")
+        else:
+            print("No se pudieron obtener los datos del usuario.")
