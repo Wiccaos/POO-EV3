@@ -14,17 +14,6 @@ def conexion_db():
         print(f"Error de conexión: {err}")
         return None
     
-# Guarda el Post obtenido en la DB
-def save_post_DB(id_post, post_title, body_post):
-    """Función para guardar el post obtenido por jsonplaceholder en la DB"""
-    cnx = conexion_db()
-    if cnx:
-        cursor = cnx.cursor()
-        query = "INSERT INTO Post (id_post, post_title, body_post) VALUES (%s, %s, %s);"
-        cursor.execute(query, (id_post, post_title, body_post))
-        cnx.commit()
-        cursor.close()
-
 # Guarda el usuario en la DB
 def save_user_DB(userId, name, username, email, phone):
     """Función para guardar al usuario obtenido en JSON Placeholder en la DB"""
@@ -35,3 +24,33 @@ def save_user_DB(userId, name, username, email, phone):
         cursor.execute(query, (userId, name, username, email, phone))
         cnx.commit()
         cursor.close()
+    print("\nUsuario Guardado en la DB correctamente\n")
+
+# Guarda el Post obtenido en la DB
+def save_post_DB(id_post, post_title, body_post):
+    """Función para guardar el post obtenido por jsonplaceholder en la DB"""
+    cnx = conexion_db()
+    if cnx:
+        cursor = cnx.cursor()
+        query = "INSERT INTO Post (id_post, post_title, body_post) VALUES (%s, %s, %s);"
+        cursor.execute(query, (id_post, post_title, body_post))
+        cnx.commit()
+        cursor.close()
+    print("\nPost Guardado en la DB correctamente\n")
+
+# Asigna un post a un usuario
+def asign_post():
+    """Función para asignar un Post a un usuario que se encuentre en la DB"""
+
+    # Obtiene los datos para asignar
+    id_post = int(input("Ingrese el ID del post que desea asignar: "))
+    userId = int(input("Ingrese el ID del usuario a asignar: "))
+
+    cnx = conexion_db()
+    if cnx:
+        cursor = cnx.cursor()
+        query = "UPDATE Post SET User_id_user = %s WHERE id_post = %s;"
+        cursor.execute(query, (id_post, userId))
+        cnx.commit()
+        cursor.close()
+    print("\nEl post se ha asignado correctamente.\n")
