@@ -3,7 +3,7 @@ from Clases.Post import Post
 from Clases.Users import User
 import Auxiliares.Constantes 
 
-def leer_post_por_id():
+def read_post():
     """Función para leer un post desde JSON Placeholder según el id"""
 
     post_id = int(input("Ingrese el ID del post que desea leer: "))
@@ -33,7 +33,7 @@ def leer_post_por_id():
         print(f"\nPost ID: {post.id}\nUserID: {post.userId}\nTítulo: {post.title}\nCuerpo: {post.body}")
 
 
-def consultar_usuario():
+def view_user():
     """Función para consultar los datos de usuario por el id"""
     user_id = int(input("Ingrese el ID del usuario a consultar: "))
     user = None
