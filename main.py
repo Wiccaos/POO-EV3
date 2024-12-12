@@ -8,7 +8,8 @@ def menu():
 Menú de JSONplaceholder
 1. Consultar Datos de Usuario
 2. Consultar Post
-3. Salir
+3. Asignar Post a Usuario
+0. Salir
 """)
         try: 
             option = int(input("Ingrese una opción: "))
@@ -20,10 +21,9 @@ Menú de JSONplaceholder
         if option == 1:
             user = Servicios.ConsumirAPI.view_user()
             if user:
-                answer = input("\n¿Desea Guardar el Usuario en la Base de Datos? (si/no): \n")
+                answer = input("\n¿Desea Guardar el Usuario en la Base de Datos? (si/no): ")
                 if answer == 'si':
                     DAL.db_conection.save_user_DB(user.userId, user.name, user.username, user.email, user.phone)
-                    print("\nUsuario Guardado en la DB correctamente\n")
                 elif answer == 'no':
                     print("\nEl Usuario no se ha guardado en la DB\n")
                     continue
@@ -32,16 +32,19 @@ Menú de JSONplaceholder
         elif option == 2:
             post = Servicios.ConsumirAPI.read_post()
             if post:
-                answer = input("\n¿Desea Guardar el post en la Base de Datos? (si/no): \n")
+                answer = input("\n¿Desea Guardar el post en la Base de Datos? (si/no): ")
                 if answer == 'si':
                     DAL.db_conection.save_post_DB(post.id, post.title, post.body)
-                    print("\nPost Guardado en la DB correctamente\n")
                 elif answer == 'no':
                     print("\nEl Post no se ha guardado en la DB\n")
                     continue
 
-        #Salir
+        # Asignar post
         elif option == 3:
+            DAL.db_conection.asign_post()
+
+        #Salir
+        elif option == 0:
             print("Saliendo del programa...")
             break
 
