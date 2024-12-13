@@ -70,19 +70,19 @@ def view_user():
 # Ver Lista de Tareas
 def view_todos():
     """Función para consultar los datos de las tareas por el id del usuario"""
-    user_id = int(input("Ingrese el ID del usuario a consultar: "))
+    todo_id = int(input("Ingrese el ID de la tarea a consultar: "))
     todo = None
     try:
-        ans = requests.get(f"{Auxiliares.Constantes.URL_Todo}/{user_id}")
+        ans = requests.get(f"{Auxiliares.Constantes.URL_Todo}/{todo_id}")
         ans.raise_for_status()  # Lanza un error si la respuesta no es 200
         todos_data = ans.json()
 
         # Crear una instancia de "To Do's" y asignar valores
-        todos = Todo()
-        todos.userId = todos_data.get('userId')
-        todos.Id = todos_data.get('id')
-        todos.title = todos_data.get('title')
-        todos.completed = todos_data.get('completed')
+        todo = Todo()
+        todo.userId = todos_data.get('userId')
+        todo.Id = todos_data.get('id')
+        todo.title = todos_data.get('title')
+        todo.completed = todos_data.get('completed')
         return todo
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
@@ -92,8 +92,8 @@ def view_todos():
         print("El usuario no fue encontrado.")
     
     finally:
-        if todos:  # Verifica si `todos` fue correctamente inicializado
-            print(f"\nUser  ID: {todos.userId}\nId de la Tarea: {todos.Id}\nTítulo de la tarea: {todos.title}\nEstado de la tarea: {todos.completed}")
+        if todo:  # Verifica si `todos` fue correctamente inicializado
+            print(f"\nUser  ID: {todo.userId}\nId de la Tarea: {todo.Id}\nTítulo de la tarea: {todo.title}\nEstado de la tarea: {todo.completed}")
         else:
             print("No se pudieron obtener los datos de la tarea.")
 
