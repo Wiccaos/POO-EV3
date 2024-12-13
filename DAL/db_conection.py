@@ -51,7 +51,7 @@ def asign_post():
     if cnx:
         cursor = cnx.cursor()
         query = "UPDATE Post SET User_id_user = %s WHERE id_post = %s;"
-        cursor.execute(query, (id_post, userId))
+        cursor.execute(query, (userId, id_post))
         cnx.commit()
         cursor.close()
     print("\nEl post se ha asignado correctamente.\n")

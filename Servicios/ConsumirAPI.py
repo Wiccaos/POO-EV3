@@ -1,7 +1,7 @@
 import requests
-from Clases.Post import Post
-from Clases.Users import User
-from Clases.Todo import Todo
+from Negocio.Post import Post
+from Negocio.Users import User
+from Negocio.Todo import Todo
 import Auxiliares.Constantes 
 
 # Mostrar post

@@ -5,7 +5,7 @@ def menu_json():
     """Menú interactivo para utilizar las funciones en jsonplaceholder"""
     while True:
         print(""" 
-Menú de JSONplaceholder
+Menú de JsonPlaceholder:
 1. Consultar Datos de Usuario
 2. Consultar Post
 3. Consultar Tarea
@@ -58,7 +58,7 @@ def menu_db():
     """Menú interacctivo para utilizar las funciones de la DB"""
     while True:
         print("""
-Menú de la Base de Datos
+Menú de la Base de Datos:
 1. Mostrar Usuarios
 2. Mostrar Posts
 3. Mostrar Tareas
@@ -86,7 +86,7 @@ Menú de la Base de Datos
             continue
         # Asignar Post
         if option == 4:
-            DAL.db_conection.asign_post_DB()
+            DAL.db_conection.asign_post()
             continue
         # Asignar Tarea
         if option == 5:
@@ -100,7 +100,11 @@ Menú de la Base de Datos
 # Ejecutar el programa
 if __name__ == "__main__":
     while True:
-        print("\n Menú del Programa \n1. Menú de JsonPlaceholder. \n2. Menú de la Base de Datos. \n0. Salir")
+        print("""
+Menú del Programa:
+1. Menú de JsonPlaceholder.
+2. Menú de la Base de Datos. 
+0. Salir""")
         option = int(input("Ingrese una opción: "))
         if option == 1:
             menu_json()
