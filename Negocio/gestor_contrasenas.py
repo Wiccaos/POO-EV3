@@ -19,7 +19,7 @@ def decrypt_password(encrypted_password, key):
 
 def password_management():
     # Solicitar la contraseña al usuario
-    password = input("Ingrese la contraseña que desea encriptar: ")
+    password = input("\nIngrese la contraseña que desea encriptar: ")
     print(f"Contraseña ingresada: {password}")
 
     # Generar una clave
@@ -28,7 +28,7 @@ def password_management():
     
     # Encriptar la contraseña
     encrypted_password = encrypt_password(password, key)
-    print(f"\nContraseña encriptada: {encrypted_password.decode()}\n")
+    print(f"Contraseña encriptada: {encrypted_password.decode()}")
 
     # Desencriptar la contraseña
     decrypted_password = decrypt_password(encrypted_password, key)
