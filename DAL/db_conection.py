@@ -1,6 +1,7 @@
 import mysql.connector
 from prettytable import from_db_cursor
 from Auxiliares.Constantes import db_user, db_password, db_host, db_database
+from Servicios.gestor_contrasenas import decrypt_password
 
 # Conexion a DB
 def conexion_db():
@@ -125,3 +126,39 @@ def view_todo_DB():
             print(tabla)
         except:
             print("\nNo hay ToDos registrados en la DB\n")
+
+# Guardar contraseña encriptada.
+def save_encrypted_password(user_id, encrypted_password, encryption_key):
+    """Guarda la contraseña encriptada en la base de datos"""
+    cnx = conexion_db()
+    if cnx:
+        cursor = cnx.cursor()
+        query = "INSERT INTO UserPasswords (user_id, encrypted_password, encryption_key) VALUES (%s, %s, %s);"
+        cursor.execute(query, (user_id, encrypted_password, encryption_key))
+        cnx.commit()
+        cursor.close()
+        print("\nContraseña encriptada guardada en la DB correctamente\n")
+
+# Desencriptar contraseña
+def get_encrypted_password(user_id):
+    """Recupera la contraseña encriptada y la clave de encriptación de la base de datos"""
+    cnx = conexion_db()
+    if cnx:
+        cursor = cnx.cursor()
+        query = "SELECT encrypted_password, encryption_key FROM UserPasswords WHERE user_id = %s;"
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchone()
+        cursor.close()
+        if result:
+            return result  # Devuelve una tupla (encrypted_password, encryption_key)
+        else:
+            print("No se encontró la contraseña para el usuario especificado.")
+            return None
+
+def decrypt_password_from_db(user_id):
+    """Desencripta la contraseña almacenada en la base de datos y la muestra en el terminal"""
+    data = get_encrypted_password(user_id)
+    if data:
+        encrypted_password, encryption_key = data
+        decrypted_password = decrypt_password(encrypted_password.encode(), encryption_key.encode())
+        print(f"La contraseña desencriptada para el usuario {user_id} es: {decrypted_password}")

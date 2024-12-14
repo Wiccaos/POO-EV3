@@ -52,6 +52,15 @@ CREATE TABLE User (
     CONSTRAINT User_pk PRIMARY KEY (id_user)
 );
 
+-- Table: UserPassword
+CREATE TABLE UserPasswords (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    encrypted_password VARCHAR(255) NOT NULL,
+    encryption_key VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(id_user)
+);
+
 -- foreign keys
 -- Reference: Address_User (table: Address)
 ALTER TABLE Address ADD CONSTRAINT Address_User FOREIGN KEY Address_User (User_id_user)

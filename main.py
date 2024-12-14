@@ -1,5 +1,7 @@
+from DAL.db_conection import decrypt_password_from_db
 import Servicios.ConsumirAPI, DAL.db_conection
-
+import Servicios.gestor_contrasenas
+from Servicios.gestor_contrasenas import password_management
 # Menú de jsonplaceholder
 def menu_json():
     """Menú interactivo para utilizar las funciones en jsonplaceholder"""
@@ -64,6 +66,7 @@ Menú de la Base de Datos:
 3. Mostrar Tareas
 4. Asignar Post a un Usuario
 5. Asignar Tarea a un Usuario
+6. Desencriptar Contraseña
 0. Salir de este menú
 """)
         try:
@@ -92,6 +95,10 @@ Menú de la Base de Datos:
         if option == 5:
             DAL.db_conection.asign_todo()
             continue
+        if option == 6:
+            user_id = input("Ingrese el ID del usuario para desencriptar: ")
+            decrypt_password_from_db(user_id)
+            continue
         # Salir
         if option == 0:
             print("Volviendo al Menú principal...")
@@ -103,13 +110,16 @@ if __name__ == "__main__":
         print("""
 Menú del Programa:
 1. Menú de JsonPlaceholder.
-2. Menú de la Base de Datos. 
+2. Menú de la Base de Datos.
+3. Menú de Contraseñas. 
 0. Salir""")
         option = int(input("Ingrese una opción: "))
         if option == 1:
             menu_json()
         elif option == 2:
             menu_db()
+        elif option == 3:
+            password_management()
         elif option == 0:
             print("Saliendo del programa...")
             break
