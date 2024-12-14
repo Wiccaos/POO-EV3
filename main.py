@@ -1,7 +1,7 @@
-from DAL.db_conection import decrypt_password_from_db
-import Servicios.ConsumirAPI, DAL.db_conection
-import Servicios.gestor_contrasenas
-from Servicios.gestor_contrasenas import password_management
+from Datos.db_conection import decrypt_password_from_db
+import Servicios.ConsumirAPI, Datos.db_conection
+import Negocio.gestor_contrasenas
+
 # Menú de jsonplaceholder
 def menu_json():
     """Menú interactivo para utilizar las funciones en jsonplaceholder"""
@@ -25,7 +25,7 @@ Menú de JsonPlaceholder:
             if user:
                 answer = input("\n¿Desea Guardar el Usuario en la Base de Datos? (si/no): ")
                 if answer == 'si':
-                    DAL.db_conection.save_user_DB(user.userId, user.name, user.username, user.email, user.phone)
+                    Datos.db_conection.save_user_DB(user.userId, user.name, user.username, user.email, user.phone)
                 elif answer == 'no':
                     print("\nEl Usuario no se ha guardado en la DB\n")
                     continue
@@ -36,7 +36,7 @@ Menú de JsonPlaceholder:
             if post:
                 answer = input("\n¿Desea Guardar el post en la Base de Datos? (si/no): ")
                 if answer == 'si':
-                    DAL.db_conection.save_post_DB(post.id, post.title, post.body)
+                    Datos.db_conection.save_post_DB(post.id, post.title, post.body)
                 elif answer == 'no':
                     print("\nEl Post no se ha guardado en la DB\n")
                     continue
@@ -47,7 +47,7 @@ Menú de JsonPlaceholder:
             if todo:
                 answer = input("\n¿Desea Guardar la Tarea en la Base de Datos? (si/no): ")
                 if answer == 'si':
-                    DAL.db_conection.save_todo(todo.Id, todo.title, todo.completed)
+                    Datos.db_conection.save_todo(todo.Id, todo.title, todo.completed)
                 elif answer == 'no':
                     print("\nLa Tarea no se ha guardado en la DB\n")
 
@@ -77,23 +77,23 @@ Menú de la Base de Datos:
 
         # Ver Users
         if option == 1:
-            DAL.db_conection.view_user_DB()
+            Datos.db_conection.view_user_DB()
             continue
         # Ver Posts
         if option == 2:
-            DAL.db_conection.view_post_DB()
+            Datos.db_conection.view_post_DB()
             continue
         # Ver Tareas
         if option == 3:
-            DAL.db_conection.view_todo_DB()
+            Datos.db_conection.view_todo_DB()
             continue
         # Asignar Post
         if option == 4:
-            DAL.db_conection.asign_post()
+            Datos.db_conection.asign_post()
             continue
         # Asignar Tarea
         if option == 5:
-            DAL.db_conection.asign_todo()
+            Datos.db_conection.asign_todo()
             continue
         if option == 6:
             user_id = input("Ingrese el ID del usuario para desencriptar: ")
@@ -111,7 +111,8 @@ if __name__ == "__main__":
 Menú del Programa:
 1. Menú de JsonPlaceholder.
 2. Menú de la Base de Datos.
-3. Menú de Contraseñas. 
+3. Menú de encriptación.
+4. Menú de Serper.
 0. Salir""")
         option = int(input("Ingrese una opción: "))
         if option == 1:
@@ -119,7 +120,7 @@ Menú del Programa:
         elif option == 2:
             menu_db()
         elif option == 3:
-            password_management()
+            Negocio.gestor_contrasenas.password_management()
         elif option == 0:
             print("Saliendo del programa...")
             break

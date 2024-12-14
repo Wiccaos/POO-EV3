@@ -1,7 +1,7 @@
 import requests
-from Negocio.Post import Post
-from Negocio.Users import User
-from Negocio.Todo import Todo
+from Modelos.Post import Post
+from Modelos.Users import User
+from Modelos.Todo import Todo
 import Auxiliares.Constantes 
 
 # Mostrar post
@@ -17,10 +17,10 @@ def read_post():
         
         # Crear una instancia de Post y asignar los valores
         post = Post()
-        post.userId = post_data['userId']
-        post.id = post_data['id']
-        post.title = post_data['title']
-        post.body = post_data['body']
+        post.userId = post_data.get('userId')
+        post.id = post_data.get('id')
+        post.title = post_data.get('title')
+        post.body = post_data.get('body')
         
         return post
     
@@ -60,7 +60,7 @@ def view_user():
         print(f"Error: {e}")
     except KeyError:
         print("El usuario no fue encontrado.")
-    
+
     finally:
         if user:  # Verifica si `user` fue correctamente inicializado
             print(f"\nUser  ID: {user.userId}\nNombre de Usuario: {user.username}\nNombre: {user.name}\nEmail: {user.email}\nTeléfono: {user.phone}")
@@ -92,7 +92,7 @@ def view_todos():
         print("El usuario no fue encontrado.")
     
     finally:
-        if todo:  # Verifica si `todos` fue correctamente inicializado
+        if todo:  # Verifica si 'todos' fue correctamente inicializado
             print(f"\nUser  ID: {todo.userId}\nId de la Tarea: {todo.Id}\nTítulo de la tarea: {todo.title}\nEstado de la tarea: {todo.completed}")
         else:
             print("No se pudieron obtener los datos de la tarea.")

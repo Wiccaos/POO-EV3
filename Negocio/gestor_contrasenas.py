@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-import DAL.db_conection
+import Datos.db_conection
 
 # Generar una clave para la encriptación
 def generate_key():
@@ -42,6 +42,6 @@ def password_management():
         user_id = input("Ingrese el ID del usuario: ")
         
         #Guardar la contraseña encriptada.
-        DAL.db_conection.save_encrypted_password(user_id, encrypted_password.decode(), key.decode())
+        Datos.db_conection.save_encrypted_password(user_id, encrypted_password.decode(), key.decode())
     else:
         print("La contraseña desencriptada NO coincide con la original.")
