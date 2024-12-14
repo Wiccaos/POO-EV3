@@ -41,13 +41,8 @@ def save_post_DB(id_post, post_title, body_post):
         print("\nPost Guardado en la DB correctamente\n")
 
 # Asigna un post a un usuario
-def asign_post():
+def asign_post(id_post, userId):
     """Asigna un Post a un usuario que se encuentre en la DB"""
-
-    # Obtiene los datos para asignar
-    id_post = int(input("Ingrese el ID del post que desea asignar: "))
-    userId = int(input("Ingrese el ID del usuario a asignar: "))
-
     cnx = conexion_db()
     if cnx:
         cursor = cnx.cursor()
@@ -70,12 +65,8 @@ def save_todo(id_todo, todo_title, completed):
         print("\nTarea Guardada en la DB correctamente\n")
 
 # Asigna una Tarea a un usuario
-def asign_todo():
+def asign_todo(userId,id_todo):
     """Función para asignar una tarea obtenida desde jsonplaceholder en la base de datos"""
-    # Obtener datos
-    id_todo = int(input("Ingrese el ID de la tarea que desea asignar: "))
-    userId = int(input("Ingrese el ID del usuario a asignar: "))
-
     cnx = conexion_db()
     if cnx:
         cursor = cnx.cursor()
@@ -133,6 +124,14 @@ def save_encrypted_password(user_id, encrypted_password, encryption_key):
     cnx = conexion_db()
     if cnx:
         cursor = cnx.cursor()
+        # Verificar si el user_id existe
+        cursor.execute("SELECT id_user FROM User WHERE id_user = %s;", (user_id,))
+        if cursor.fetchone() is None:
+            print("\nEl usuario ingresado no existe en la DB. No se puede guardar la contraseña.")
+            cursor.close()
+            return  # Salir de la función si el usuario no existe
+
+        # Si el usuario existe, proceder a guardar la contraseña
         query = "INSERT INTO UserPasswords (user_id, encrypted_password, encryption_key) VALUES (%s, %s, %s);"
         cursor.execute(query, (user_id, encrypted_password, encryption_key))
         cnx.commit()

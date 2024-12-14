@@ -1,6 +1,5 @@
-from Datos.db_conection import decrypt_password_from_db
-import Servicios.ConsumirAPI, Datos.db_conection
-import Negocio.gestor_contrasenas
+import Negocio.neg_jsonplaceholder, Negocio.neg_asign, Negocio.gestor_contrasenas
+import Datos.db_conection
 
 # Menú de jsonplaceholder
 def menu_json():
@@ -18,39 +17,15 @@ Menú de JsonPlaceholder:
         except ValueError:
             print("Error: Debe ingresar un número")
             continue  # Volver al inicio del bucle
-
         # User
         if option == 1:
-            user = Servicios.ConsumirAPI.view_user()
-            if user:
-                answer = input("\n¿Desea Guardar el Usuario en la Base de Datos? (si/no): ")
-                if answer == 'si':
-                    Datos.db_conection.save_user_DB(user.userId, user.name, user.username, user.email, user.phone)
-                elif answer == 'no':
-                    print("\nEl Usuario no se ha guardado en la DB\n")
-                    continue
-
+            Negocio.neg_jsonplaceholder.neg_user()
         # Post
         elif option == 2:
-            post = Servicios.ConsumirAPI.read_post()
-            if post:
-                answer = input("\n¿Desea Guardar el post en la Base de Datos? (si/no): ")
-                if answer == 'si':
-                    Datos.db_conection.save_post_DB(post.id, post.title, post.body)
-                elif answer == 'no':
-                    print("\nEl Post no se ha guardado en la DB\n")
-                    continue
-
+            Negocio.neg_jsonplaceholder.neg_post()
         # Tarea
         elif option == 3:
-            todo = Servicios.ConsumirAPI.view_todos()
-            if todo:
-                answer = input("\n¿Desea Guardar la Tarea en la Base de Datos? (si/no): ")
-                if answer == 'si':
-                    Datos.db_conection.save_todo(todo.Id, todo.title, todo.completed)
-                elif answer == 'no':
-                    print("\nLa Tarea no se ha guardado en la DB\n")
-
+            Negocio.neg_jsonplaceholder.neg_todos()
         #Salir
         elif option == 0:
             print("Volviendo al menú principal...")
@@ -73,38 +48,32 @@ Menú de la Base de Datos:
             option = int(input("Ingrese una opción: "))
         except ValueError:
             print("Error: Debe ingresar un número")
-            return
+            continue
 
         # Ver Users
         if option == 1:
             Datos.db_conection.view_user_DB()
-            continue
         # Ver Posts
         if option == 2:
             Datos.db_conection.view_post_DB()
-            continue
         # Ver Tareas
         if option == 3:
             Datos.db_conection.view_todo_DB()
-            continue
         # Asignar Post
         if option == 4:
-            Datos.db_conection.asign_post()
-            continue
+            Negocio.neg_asign.asign_post()
         # Asignar Tarea
         if option == 5:
-            Datos.db_conection.asign_todo()
-            continue
+            Negocio.neg_asign.asign_todo()
         if option == 6:
             user_id = input("Ingrese el ID del usuario para desencriptar: ")
-            decrypt_password_from_db(user_id)
-            continue
+            Datos.db_conection.decrypt_password_from_db(user_id)
         # Salir
         if option == 0:
             print("Volviendo al Menú principal...")
             break
 
-# Ejecutar el programa
+# Menú para ejecutar el programa
 if __name__ == "__main__":
     while True:
         print("""

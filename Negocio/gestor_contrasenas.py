@@ -28,7 +28,7 @@ def password_management():
     
     # Encriptar la contraseña
     encrypted_password = encrypt_password(password, key)
-    print(f"Contraseña encriptada: {encrypted_password.decode()}")
+    print(f"\nContraseña encriptada: {encrypted_password.decode()}\n")
 
     # Desencriptar la contraseña
     decrypted_password = decrypt_password(encrypted_password, key)
@@ -36,7 +36,7 @@ def password_management():
 
     # Comparar la contraseña original con la desencriptada
     if password == decrypted_password:
-        print("La contraseña desencriptada coincide con la original.")
+        print("\nLa contraseña desencriptada coincide con la original.\n")
         
         # Solicitar el ID del usuario para guardar la contraseña.
         user_id = input("Ingrese el ID del usuario: ")
@@ -44,4 +44,4 @@ def password_management():
         #Guardar la contraseña encriptada.
         Datos.db_conection.save_encrypted_password(user_id, encrypted_password.decode(), key.decode())
     else:
-        print("La contraseña desencriptada NO coincide con la original.")
+        print("\nLa contraseña desencriptada NO coincide con la original.\n")
