@@ -26,13 +26,30 @@ def neg_todos():
 def neg_user():
     try:
         user_id = int(input("Ingrese el ID del usuario a consultar: "))
-        user = Servicios.ConsumirAPI.view_user(user_id)
-        if user:  # Verifica si 'user' fue correctamente inicializado
-            print(f"\nUser  ID: {user.userId}\nNombre de Usuario: {user.username}\nNombre: {user.name}\nEmail: {user.email}\nTeléfono: {user.phone}")
+        user, user_company, user_address = Servicios.ConsumirAPI.view_user(user_id)
+        if user:
+            print(f"\nUser    ID: {user.userId}\nNombre de Usuario: {user.username}\nNombre: {user.name}\nEmail: {user.email}\nTeléfono: {user.phone}\nSitio Web: {user.website}")
+            print(f"Compañía: {user_company.name_company}\nDirección: {user_address.suite}, {user_address.street}, {user_address.city}")
             while True:
                 answer = input("\n¿Desea Guardar el Usuario en la Base de Datos? (si/no): ")
                 if answer == 'si':
-                    Datos.db_conection.save_user_DB(user.userId, user.name, user.username, user.email, user.phone)
+                    Datos.db_conection.save_user_DB(
+                        user.userId,
+                        user.name,
+                        user.username,
+                        user.email,
+                        user.website,
+                        user.phone,
+                        user_company.name_company,
+                        user_company.catch_phrase,
+                        user_company.bs,
+                        user_address.street,
+                        user_address.suite,
+                        user_address.city,
+                        user_address.zip_code,
+                        user_address.lat,
+                        user_address.lng
+                    )
                     break
                 elif answer == 'no':
                     print("\nEl Usuario NO se ha guardado en la DB\n")

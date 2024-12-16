@@ -1,7 +1,5 @@
 import requests
-from Modelos.Post import Post
-from Modelos.Users import User
-from Modelos.Todo import Todo
+from Modelos import Post, Users, Todo, Companies, Address
 import Auxiliares.Constantes 
 
 # Mostrar post
@@ -13,7 +11,7 @@ def read_post(post_id):
         post_data = ans.json()
         
         # Crear una instancia de Post y asignar los valores
-        post = Post()
+        post = Post.Post()
         post.userId = post_data.get('userId')
         post.id = post_data.get('id')
         post.title = post_data.get('title')
@@ -37,13 +35,34 @@ def view_user(user_id):
         user_data = ans.json()
 
         # Crear una instancia de Usuario y asignar los valores
-        user = User()
+        user = Users.User()
         user.userId = user_data.get('id')
         user.name = user_data.get('name')
         user.username = user_data.get('username')
         user.email = user_data.get('email')
+        user.website = user_data.get('website')
         user.phone = user_data.get('phone')
-        return user
+
+        # Crear una instancia de Companies y asignar los valores
+        user_company = Companies.Companies()
+        user_company.name_company = user_data.get('company', {}).get('name')
+        user_company.catch_phrase = user_data.get('company', {}).get('catchPhrase')
+        user_company.bs = user_data.get('company', {}).get('bs')
+        user_company.userId = user_data.get('id')
+
+        # Crear una instancia de Address y asignar los valores
+        user_address = Address.Address(
+            street=user_data.get('address', {}).get('street'),
+            suite=user_data.get('address', {}).get('suite'),
+            city=user_data.get('address', {}).get('city'),
+            zip_code=user_data.get('address', {}).get('zipcode'),
+            lat=user_data.get('address', {}).get('geo', {}).get('lat'),
+            lng=user_data.get('address', {}).get('geo', {}).get('lng'),
+            userId=user_data.get('id')
+        )
+        
+        return user, user_company, user_address
+    
 
     # Manejo de errores
     except requests.exceptions.HTTPError as http_err:
