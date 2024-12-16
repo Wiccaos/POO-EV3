@@ -70,10 +70,10 @@ Menú de la Base de Datos:
             Datos.serper_db.view_search_DB()
         # Asignar Post
         elif option == 5:
-            Negocio.neg_jsonplaceholder.asign_post()
+            Negocio.neg_asign.asign_post()
         # Asignar Tarea
         elif option == 6:
-            Negocio.neg_jsonplaceholder.asign_todo()
+            Negocio.neg_asign.asign_todo()
         elif option == 7:
             user_id = input("Ingrese el ID del usuario para desencriptar: ")
             Negocio.gestor_contrasenas.decrypt_password_from_db(user_id)
