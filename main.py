@@ -92,7 +92,7 @@ Menú del Programa:
 1. Menú de JsonPlaceholder.
 2. Menú de la Base de Datos.
 3. Menú de encriptación.
-4. Menú de Serper.
+4. Busquedas con Serper.
 0. Salir""")
         option = int(input("Ingrese una opción: "))
         if option == 1:
