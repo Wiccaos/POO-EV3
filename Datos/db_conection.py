@@ -154,6 +154,7 @@ def get_encrypted_password(user_id):
             print("No se encontró la contraseña para el usuario especificado.")
             return None
 
+# Desencripta la constraseña desde la db
 def decrypt_password_from_db(user_id):
     """Desencripta la contraseña almacenada en la base de datos y la muestra en el terminal"""
     data = get_encrypted_password(user_id)
@@ -161,3 +162,49 @@ def decrypt_password_from_db(user_id):
         encrypted_password, encryption_key = data
         decrypted_password = decrypt_password(encrypted_password.encode(), encryption_key.encode())
         print(f"La contraseña desencriptada para el usuario {user_id} es: {decrypted_password}")
+
+# Guarda la busqueda con serper en la DB
+def save_busqueda(query):
+    """Guarda la búsqueda en la base de datos y devuelve el ID de la búsqueda."""
+    cnx = conexion_db()
+    if cnx:
+        cursor = cnx.cursor()
+        query_sql = "INSERT INTO Busqueda (keyword_search) VALUES (%s);"
+        cursor.execute(query_sql, (query,))
+        cnx.commit()
+        busqueda_id = cursor.lastrowid  # Obtiene el ID de la última inserción
+        cursor.close()
+        return busqueda_id
+
+# Guarda el resultado de la busqueda en la DB
+def save_resultado(busqueda_id, titulo, url, descripcion):
+    """Guarda un resultado de búsqueda en la base de datos."""
+    cnx = conexion_db()
+    if cnx:
+        cursor = cnx.cursor()
+        query_sql = "INSERT INTO Resultados (Busqueda_id_search, titulo, url, descripcion) VALUES (%s, %s, %s, %s);"
+        cursor.execute(query_sql, (busqueda_id, titulo, url, descripcion))
+        cnx.commit()
+        cursor.close()
+
+def view_search_DB():
+    """Muestra los resultados de búsqueda en el terminal"""
+    cnx = conexion_db()
+    if cnx:
+        cursor = cnx.cursor()
+        query = """
+                    SELECT 
+                        b.keyword_search as Busqueda,
+                        r.titulo,
+                        r.url,
+                        r.descripcion
+                    FROM 
+                        Busqueda b
+                    JOIN 
+                        Resultados r ON b.id_search = r.Busqueda_id_search;"""
+        cursor.execute(query)
+        try:
+            tabla = from_db_cursor(cursor)
+            print(tabla)
+        except:
+            print("\nNo hay ToDos registrados en la DB\n")

@@ -30,6 +30,8 @@ Menú de JsonPlaceholder:
         elif option == 0:
             print("Volviendo al menú principal...")
             break
+        else:
+            print("Error: Opción no válida. Por favor, vuelva a intentarlo.")
 
 def menu_db():
     """Menú interacctivo para utilizar las funciones de la DB"""
@@ -39,9 +41,10 @@ Menú de la Base de Datos:
 1. Mostrar Usuarios
 2. Mostrar Posts
 3. Mostrar Tareas
-4. Asignar Post a un Usuario
-5. Asignar Tarea a un Usuario
-6. Desencriptar Contraseña
+4. Mostrar Busquedas y Resultados
+5. Asignar Post a un Usuario
+6. Asignar Tarea a un Usuario
+7. Desencriptar Contraseña
 0. Salir de este menú
 """)
         try:
@@ -54,24 +57,29 @@ Menú de la Base de Datos:
         if option == 1:
             Datos.db_conection.view_user_DB()
         # Ver Posts
-        if option == 2:
+        elif option == 2:
             Datos.db_conection.view_post_DB()
         # Ver Tareas
-        if option == 3:
+        elif option == 3:
             Datos.db_conection.view_todo_DB()
+        # Ver Busquedas y Resultados
+        elif option == 4:
+            Datos.db_conection.view_search_DB()
         # Asignar Post
-        if option == 4:
+        elif option == 5:
             Negocio.neg_asign.asign_post()
         # Asignar Tarea
-        if option == 5:
+        elif option == 6:
             Negocio.neg_asign.asign_todo()
-        if option == 6:
+        elif option == 7:
             user_id = input("Ingrese el ID del usuario para desencriptar: ")
             Datos.db_conection.decrypt_password_from_db(user_id)
         # Salir
-        if option == 0:
+        elif option == 0:
             print("Volviendo al Menú principal...")
             break
+        else:
+            print("Error: Opción no válida. Por favor, vuelva a intentarlo.")
 
 # Menú para ejecutar el programa
 if __name__ == "__main__":
@@ -95,3 +103,5 @@ Menú del Programa:
         elif option == 0:
             print("Saliendo del programa...")
             break
+        else:
+            print("Error: Opción no válida. Por favor, vuelva a intentarlo.")
