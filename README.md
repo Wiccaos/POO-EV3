@@ -7,3 +7,5 @@ pip install requests
 pip install mysql.connector
 
 pip install prettytable
+
+pip install cryptography
