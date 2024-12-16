@@ -1,7 +1,5 @@
-import Negocio.neg_jsonplaceholder, Negocio.neg_asign, Negocio.gestor_contrasenas
+import Negocio.neg_jsonplaceholder, Negocio.neg_asign, Negocio.gestor_contrasenas, Negocio.neg_serper
 import Datos.db_conection
-# from Servicios.serperApi import menu_serper
-from Negocio.requests_serper import menu_serper
 
 # Menú de jsonplaceholder
 def menu_json():
@@ -93,7 +91,7 @@ Menú del Programa:
         elif option == 3:
             Negocio.gestor_contrasenas.password_management()
         elif option == 4:
-            menu_serper()
+            Negocio.neg_serper.manage_serper()
         elif option == 0:
             print("Saliendo del programa...")
             break

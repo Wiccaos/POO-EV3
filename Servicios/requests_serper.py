@@ -2,10 +2,8 @@ import requests
 import json
 import Auxiliares.Constantes
 
-url = Auxiliares.Constantes.SERPER_URL
-def menu_serper():
-    # Solicitar al usuario que ingrese la query
-    query = input("Ingrese la query de búsqueda: ")
+def use_serper(query):
+
 
     payload = json.dumps({
         "q": query  # Usar la query ingresada por el usuario
