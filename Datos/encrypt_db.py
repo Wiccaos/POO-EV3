@@ -10,7 +10,7 @@ def save_encrypted_password(user_id, encrypted_password, encryption_key):
         if cursor.fetchone() is None:
             print("\nEl usuario ingresado no existe en la DB. No se puede guardar la contraseña.")
             cursor.close()
-            return  # Salir de la función si el usuario no existe
+            return
 
         # Si el usuario existe, proceder a guardar la contraseña
         query = "INSERT INTO UserPasswords (user_id, encrypted_password, encryption_key) VALUES (%s, %s, %s);"

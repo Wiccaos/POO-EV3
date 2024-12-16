@@ -5,7 +5,7 @@ def neg_todos():
     try:
         todo_id = int(input("Ingrese el ID de la tarea a consultar: "))
         todo = Servicios.ConsumirAPI.view_todos(todo_id)
-        if todo:  # Verifica si 'todos' fue correctamente inicializado
+        if todo:
             print(f"\nUser  ID: {todo.userId}\nId de la Tarea: {todo.Id}\nTítulo de la tarea: {todo.title}\nEstado de la tarea: {todo.completed}")
             while True:
                 answer = input("\n¿Desea Guardar la Tarea en la Base de Datos? (si/no): ")
@@ -66,7 +66,7 @@ def neg_post():
     try:
         post_id = int(input("Ingrese el ID del post que desea leer: "))
         post = Servicios.ConsumirAPI.read_post(post_id)
-        if post:  # Verifica si 'post' fue correctamente inicializado
+        if post:
             print(f"\nPost ID: {post.id}\nUserID: {post.userId}\nTítulo: {post.title}\nCuerpo: {post.body}")
             while True:
                 answer = input("\n¿Desea Guardar el post en la Base de Datos? (si/no): ")

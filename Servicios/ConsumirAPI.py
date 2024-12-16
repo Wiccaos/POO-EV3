@@ -31,10 +31,10 @@ def view_user(user_id):
     """Función para consultar los datos de usuario por el id"""
     try:
         ans = requests.get(f"{Auxiliares.Constantes.URL_Users}/{user_id}")
-        ans.raise_for_status()  # Lanza un error si la respuesta no es 200
+        ans.raise_for_status()
         user_data = ans.json()
 
-        # Crear una instancia de Usuario y asignar los valores
+        # Crear una instancia de Usuario y asigna los valores
         user = Users.User()
         user.userId = user_data.get('id')
         user.name = user_data.get('name')
@@ -43,14 +43,14 @@ def view_user(user_id):
         user.website = user_data.get('website')
         user.phone = user_data.get('phone')
 
-        # Crear una instancia de Companies y asignar los valores
+        # Crear una instancia de Companies y asigna los valores
         user_company = Companies.Companies()
         user_company.name_company = user_data.get('company', {}).get('name')
         user_company.catch_phrase = user_data.get('company', {}).get('catchPhrase')
         user_company.bs = user_data.get('company', {}).get('bs')
         user_company.userId = user_data.get('id')
 
-        # Crear una instancia de Address y asignar los valores
+        # Crear una instancia de Address y asigna los valores
         user_address = Address.Address(
             street=user_data.get('address', {}).get('street'),
             suite=user_data.get('address', {}).get('suite'),
@@ -63,7 +63,6 @@ def view_user(user_id):
         
         return user, user_company, user_address
     
-
     # Manejo de errores
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
@@ -80,7 +79,7 @@ def view_todos(todo_id):
         ans.raise_for_status()
         todos_data = ans.json()
 
-        # Crear una instancia de "To Do's" y asignar valores
+        # Crear una instancia de To Do's y asigna los valores
         todo = Todo.Todo()
         todo.userId = todos_data.get('userId')
         todo.Id = todos_data.get('id')
