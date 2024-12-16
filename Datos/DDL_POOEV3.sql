@@ -45,6 +45,7 @@ CREATE TABLE ToDos (
 -- Table: User
 CREATE TABLE User (
     id_user int  NOT NULL AUTO_INCREMENT,
+    name varchar(100)  NOT NULL,
     username varchar(50)  NOT NULL,
     user_email varchar(150)  NOT NULL,
     user_website varchar(100)  NOT NULL,
