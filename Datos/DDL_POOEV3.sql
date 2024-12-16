@@ -61,6 +61,23 @@ CREATE TABLE UserPasswords (
     FOREIGN KEY (user_id) REFERENCES User(id_user)
 );
 
+-- Table: Busqueda
+CREATE TABLE Busqueda (
+    id_search int  NOT NULL AUTO_INCREMENT,
+    keyword_search varchar(250)  NOT NULL,
+    CONSTRAINT Busqueda_pk PRIMARY KEY (id_search)
+);
+
+-- Table: Resultados
+CREATE TABLE Resultados (
+    id_resultado int  NOT NULL AUTO_INCREMENT,
+    titulo text  NOT NULL,
+    url text  NOT NULL,
+    descripcion text  NOT NULL,
+    Busqueda_id_search int  NOT NULL,
+    CONSTRAINT Resultados_pk PRIMARY KEY (id_resultado)
+);
+
 -- foreign keys
 -- Reference: Address_User (table: Address)
 ALTER TABLE Address ADD CONSTRAINT Address_User FOREIGN KEY Address_User (User_id_user)
@@ -77,5 +94,9 @@ ALTER TABLE Post ADD CONSTRAINT Post_User FOREIGN KEY Post_User (User_id_user)
 -- Reference: ToDos_User (table: ToDos)
 ALTER TABLE ToDos ADD CONSTRAINT ToDos_User FOREIGN KEY ToDos_User (User_id_user)
     REFERENCES User (id_user);
+
+ALTER TABLE Resultados ADD CONSTRAINT Resultados_Busqueda FOREIGN KEY Resultados_Busqueda (Busqueda_id_search)
+    REFERENCES Busqueda (id_search);
+
 
 -- End of file.
