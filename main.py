@@ -1,3 +1,6 @@
+import Datos.encrypt_db
+import Datos.jsonplace_db
+import Datos.serper_db
 import Negocio.neg_jsonplaceholder, Negocio.neg_asign, Negocio.gestor_contrasenas, Negocio.neg_serper
 import Datos.db_conection
 
@@ -55,25 +58,25 @@ Menú de la Base de Datos:
 
         # Ver Users
         if option == 1:
-            Datos.db_conection.view_user_DB()
+            Datos.jsonplace_db.view_user_DB()
         # Ver Posts
         elif option == 2:
-            Datos.db_conection.view_post_DB()
+            Datos.jsonplace_db.view_post_DB()
         # Ver Tareas
         elif option == 3:
-            Datos.db_conection.view_todo_DB()
+            Datos.jsonplace_db.view_todo_DB()
         # Ver Busquedas y Resultados
         elif option == 4:
-            Datos.db_conection.view_search_DB()
+            Datos.serper_db.view_search_DB()
         # Asignar Post
         elif option == 5:
-            Negocio.neg_asign.asign_post()
+            Negocio.neg_jsonplaceholder.asign_post()
         # Asignar Tarea
         elif option == 6:
-            Negocio.neg_asign.asign_todo()
+            Negocio.neg_jsonplaceholder.asign_todo()
         elif option == 7:
             user_id = input("Ingrese el ID del usuario para desencriptar: ")
-            Datos.db_conection.decrypt_password_from_db(user_id)
+            Negocio.gestor_contrasenas.decrypt_password_from_db(user_id)
         # Salir
         elif option == 0:
             print("Volviendo al Menú principal...")

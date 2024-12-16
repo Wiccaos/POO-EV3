@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-import Datos.db_conection
+import Datos.encrypt_db
 
 # Generar una clave para la encriptación
 def generate_key():
@@ -16,6 +16,15 @@ def decrypt_password(encrypted_password, key):
     fernet = Fernet(key)
     decrypted_password = fernet.decrypt(encrypted_password).decode()
     return decrypted_password
+
+# Desencripta la constraseña desde la db
+def decrypt_password_from_db(user_id):
+    """Desencripta la contraseña almacenada en la base de datos y la muestra en el terminal"""
+    data = Datos.encrypt_db.get_encrypted_password(user_id)
+    if data:
+        encrypted_password, encryption_key = data
+        decrypted_password = decrypt_password(encrypted_password.encode(), encryption_key.encode())
+        print(f"La contraseña desencriptada para el usuario {user_id} es: {decrypted_password}")
 
 def password_management():
     # Solicitar la contraseña al usuario
@@ -42,6 +51,6 @@ def password_management():
         user_id = input("Ingrese el ID del usuario: ")
         
         #Guardar la contraseña encriptada.
-        Datos.db_conection.save_encrypted_password(user_id, encrypted_password.decode(), key.decode())
+        Datos.encrypt_db.save_encrypted_password(user_id, encrypted_password.decode(), key.decode())
     else:
         print("\nLa contraseña desencriptada NO coincide con la original.\n")

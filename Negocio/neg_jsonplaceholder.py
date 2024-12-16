@@ -1,4 +1,4 @@
-import Servicios.ConsumirAPI, Datos.db_conection
+import Servicios.ConsumirAPI, Datos.jsonplace_db
 
 # Procesa los datos de las Tareas
 def neg_todos():
@@ -10,7 +10,7 @@ def neg_todos():
             while True:
                 answer = input("\n¿Desea Guardar la Tarea en la Base de Datos? (si/no): ")
                 if answer == 'si':
-                    Datos.db_conection.save_todo(todo.Id, todo.title, todo.completed)
+                    Datos.jsonplace_db.save_todo(todo.Id, todo.title, todo.completed)
                     break
                 elif answer == 'no':
                     print("\nLa Tarea NO se ha guardado en la DB\n")
@@ -33,7 +33,7 @@ def neg_user():
             while True:
                 answer = input("\n¿Desea Guardar el Usuario en la Base de Datos? (si/no): ")
                 if answer == 'si':
-                    Datos.db_conection.save_user_DB(
+                    Datos.jsonplace_db.save_user_DB(
                         user.userId,
                         user.name,
                         user.username,
@@ -71,7 +71,7 @@ def neg_post():
             while True:
                 answer = input("\n¿Desea Guardar el post en la Base de Datos? (si/no): ")
                 if answer == 'si':
-                    Datos.db_conection.save_post_DB(post.id, post.title, post.body)
+                    Datos.jsonplace_db.save_post_DB(post.id, post.title, post.body)
                     break
                 elif answer == 'no':
                     print("\nEl Post NO se ha guardado en la DB\n")

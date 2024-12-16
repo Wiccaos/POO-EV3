@@ -77,11 +77,11 @@ def view_todos(todo_id):
     """Función para consultar los datos de las tareas por el id del usuario"""
     try:
         ans = requests.get(f"{Auxiliares.Constantes.URL_Todo}/{todo_id}")
-        ans.raise_for_status()  # Lanza un error si la respuesta no es 200
+        ans.raise_for_status()
         todos_data = ans.json()
 
         # Crear una instancia de "To Do's" y asignar valores
-        todo = Todo()
+        todo = Todo.Todo()
         todo.userId = todos_data.get('userId')
         todo.Id = todos_data.get('id')
         todo.title = todos_data.get('title')
