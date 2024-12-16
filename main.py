@@ -1,8 +1,5 @@
-import Datos.encrypt_db
-import Datos.jsonplace_db
-import Datos.serper_db
-import Negocio.neg_jsonplaceholder, Negocio.neg_asign, Negocio.gestor_contrasenas, Negocio.neg_serper
-import Datos.db_conection
+import Negocio.neg_jsonplaceholder, Negocio.neg_asign, Negocio.gestor_contrasenas, Negocio.neg_serper, Datos.db_conection, Datos.serper_db, Datos.jsonplace_db, Datos.encrypt_db
+
 
 # Menú de jsonplaceholder
 def menu_json():
