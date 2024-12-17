@@ -1,7 +1,5 @@
 import Negocio.neg_jsonplaceholder, Negocio.neg_asign, Negocio.gestor_contrasenas, Negocio.neg_serper, Datos.db_conection, Datos.serper_db, Datos.jsonplace_db, Datos.encrypt_db
 
-
-# Menú de jsonplaceholder
 def menu_json():
     """Menú interactivo para utilizar las funciones en jsonplaceholder"""
     while True:
