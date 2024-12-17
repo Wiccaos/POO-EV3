@@ -104,7 +104,7 @@ def asign_post(id_post, userId):
     print("\nEl post se ha asignado correctamente.\n")
 
 # Guarda la Tarea en la DB
-def save_todo(id_todo, todo_title, completed):
+def save_todo_DB(id_todo, todo_title, completed):
     """Guarda la Tarea desde Jsonplaceholder en la Base de Datos"""
     cnx = Datos.db_conection.conexion_db()
     if cnx:

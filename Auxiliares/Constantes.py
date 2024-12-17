@@ -1,9 +1,9 @@
 # Jsonplaceholder API
 URL_JSONPLACEHOLDER = "https://jsonplaceholder.typicode.com/"
 
-URL_Post = "https://jsonplaceholder.typicode.com/posts"
-URL_Todo = "https://jsonplaceholder.typicode.com/todos"
-URL_Users = "https://jsonplaceholder.typicode.com/users"
+URL_Post = URL_JSONPLACEHOLDER + 'posts'
+URL_Todo = URL_JSONPLACEHOLDER + 'todos'
+URL_Users = URL_JSONPLACEHOLDER + 'users'
 
 # Serper API
 SERPER_API_KEY = '436a2e8ebca22ffebd458b5bc7087ddf1ffb6574'

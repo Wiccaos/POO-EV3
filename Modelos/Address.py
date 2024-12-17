@@ -1,7 +1,9 @@
-class Address():
+from Modelos.User import User
+
+class Address(User):
     """Direcciones"""
-    def __init__(self, street, suite, city, zip_code, lat, lng, userId):
-        self.userId = userId
+    def __init__(self, street='', suite='', city='', zip_code='', lat='', lng='', userId=0):
+        super().__init__(userId)
         self.street = street
         self.suite = suite
         self.city = city

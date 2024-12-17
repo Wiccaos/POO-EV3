@@ -1,5 +1,5 @@
 import requests
-from Modelos import Post, Users, Todo, Companies, Address
+from Modelos import Company, Post, User, Todo, Address
 import Auxiliares.Constantes 
 
 # Mostrar post
@@ -35,7 +35,7 @@ def view_user(user_id):
         user_data = ans.json()
 
         # Crear una instancia de Usuario y asigna los valores
-        user = Users.User()
+        user = User.User()
         user.userId = user_data.get('id')
         user.name = user_data.get('name')
         user.username = user_data.get('username')
@@ -44,7 +44,7 @@ def view_user(user_id):
         user.phone = user_data.get('phone')
 
         # Crear una instancia de Companies y asigna los valores
-        user_company = Companies.Companies()
+        user_company = Company.Company()
         user_company.name_company = user_data.get('company', {}).get('name')
         user_company.catch_phrase = user_data.get('company', {}).get('catchPhrase')
         user_company.bs = user_data.get('company', {}).get('bs')
