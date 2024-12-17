@@ -16,7 +16,7 @@ Menú de JsonPlaceholder:
             option = int(input("Ingrese una opción: "))
         except ValueError:
             print("Error: Debe ingresar un número")
-            continue  # Volver al inicio del bucle
+            continue
         # User
         if option == 1:
             Negocio.neg_jsonplaceholder.neg_user()
